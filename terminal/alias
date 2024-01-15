@@ -1,0 +1,2 @@
+alias gall='git add -A'
+alias commit='git commit -m'
