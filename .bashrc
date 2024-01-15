@@ -115,3 +115,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+export DOTFILES="$HOME/.dotfiles"
+
+source $DOTFILES/terminal/alias

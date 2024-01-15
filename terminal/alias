@@ -1,2 +1,6 @@
+# git related alias
+alias gadd='git add'
 alias gall='git add -A'
-alias commit='git commit -m'
+alias gci='git commit -m'
+alias gpush='git push'
+alias gstat='git status'
