@@ -116,6 +116,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
+## user config
+# make dotfiles env var
 export DOTFILES="$HOME/.dotfiles"
-
+# source
 source $DOTFILES/terminal/alias
+
+
