@@ -1,0 +1,12 @@
+[Nemo Action]
+
+Name=Paste Image
+Comment=Clipboard to PNG
+Exec=<pasteimage.sh %P>
+Icon-Name=gtk-convert
+Extensions=dir;
+Quote=single
+Selection=none
+Dependencies=pimg;
+EscapeSpaces=true
+Terminal=false
