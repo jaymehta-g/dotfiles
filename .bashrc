@@ -123,3 +123,5 @@ export DOTFILES="$HOME/.dotfiles"
 source $DOTFILES/terminal/alias
 
 
+
+eval "$(thefuck --alias)"
