@@ -4,3 +4,6 @@
 [user]
 	email = 91770194+jaymehta-g@users.noreply.github.com
 	name = Jay
+[alias]
+	ci = commit
+	st = status
