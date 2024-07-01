@@ -1,0 +1,15 @@
+# custom PATH directories
+_custom_path_dirs=[
+    '/opt/godot',
+    '/usr/local/go/bin',
+]
+for x in _custom_path_dirs:
+    if not x in $PATH:
+        $PATH.append(x)
+
+
+# thefuck
+xontrib load thefuck
+
+# move prompt to a new line
+$PROMPT='{YELLOW}{env_name}{RESET}{BOLD_GREEN}{user}@{hostname}{BOLD_BLUE} {cwd}{branch_color}{curr_branch: {}}{RESET} {RED}{last_return_code_if_nonzero:[{BOLD_INTENSE_RED}{}{RED}] }{RESET}\n{BOLD_BLUE}{prompt_end}{RESET} '
