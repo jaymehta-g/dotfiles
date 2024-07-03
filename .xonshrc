@@ -13,22 +13,27 @@ for x in _custom_path_dirs:
     if not x in $PATH:
         $PATH.append(x)
 
+# custom env
+$DOTFILES = "~/.dotfiles"
 
-# thefuck
-xontrib load thefuck
-
-
+# custom prompt
 def colortext(text: str, color: str, bgcolor: str):
     return "{" + color + "}{BACKGROUND_" + bgcolor + "}" + text + r"{RESET}"
 
-
 def prompt():
     sections = [
-        r" {user} ",
+        # r" {user} ",
+        # Set later!
     ]
     colors = [
         "INTENSE_GREEN",
     ]
+
+    # username
+    uname = $(whoami)[0:-1]
+    if uname == "root":
+        colors[0] = "WHITE"
+    sections.append(" {} ".format(uname)) 
 
     # venv
     venvname = $PROMPT_FIELDS["env_name"]()
@@ -51,7 +56,7 @@ def prompt():
         colors.append("INTENSE_RED")
     
     # now, create the prompt string
-    text: str = ""
+    text: str = r"{BACKGROUND_" + colors[0] + r"}{BLACK}{RESET}"
     prev_color: str = None
     for sec, col, in zip(sections, colors):
         if prev_color:
@@ -61,6 +66,7 @@ def prompt():
         prev_color = col
     text += colortext("", prev_color, "BLACK")
 
+    # return code
     if __xonsh__.history.rtns.__len__() > 0:
         last_return_code = __xonsh__.history.rtns[-1]
         if (last_return_code != 0):
@@ -85,3 +91,15 @@ def rightprompt():
         r"{RESET}"
 
 $RIGHT_PROMPT = rightprompt
+
+# return code util function
+def last_return_code():
+    rtns = __xonsh__.history.rtns
+    if len(rtns) == 0:
+        return 0 # default
+    else:
+        return rtns[-1]
+
+# last cmd util function
+def lastcmd():
+    return __xonsh__.history[-1].cmd[0:-1]
