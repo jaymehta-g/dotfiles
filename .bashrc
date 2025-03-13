@@ -121,7 +121,4 @@ fi
 export DOTFILES="$HOME/.dotfiles"
 # source
 source $DOTFILES/terminal/alias
-
-
-
-eval "$(thefuck --alias)"
+eval "$(direnv hook bash)"
