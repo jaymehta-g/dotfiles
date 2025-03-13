@@ -1,6 +1,12 @@
 [credential "https://github.com"]
 	helper = 
-	helper = !/usr/bin/gh auth git-credential
+	helper = !/run/current-system/sw/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/run/current-system/sw/bin/gh auth git-credential
+[safe]
+	directory = /etc/nixos
+	directory = /etc/nixos/.git
 [user]
 	email = 91770194+jaymehta-g@users.noreply.github.com
 	name = Jay
