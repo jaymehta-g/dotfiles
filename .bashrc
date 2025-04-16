@@ -118,7 +118,7 @@ fi
 
 ## user config
 # make dotfiles env var
-export DOTFILES="$HOME/.dotfiles"
+export DOTS="$HOME/.dotfiles"
 # source
-source $DOTFILES/terminal/alias
+source $DOTS/terminal/alias
 eval "$(direnv hook bash)"
