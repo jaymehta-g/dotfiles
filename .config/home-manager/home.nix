@@ -31,12 +31,15 @@
   home.file = {
   };
 
+  # find these at
+  # /run/current-system/sw/share/applications
   xdg.mimeApps = {
     enable = true;
     defaultApplications = 
     let 
       firefox = "firefox.desktop";
       image = "org.gnome.Loupe.desktop";
+      thunderbird = "thunderbird.desktop";
     in 
     {
       "application/pdf" = firefox;
@@ -48,6 +51,28 @@
       "image/png" = image;
       "image/jpeg" = image;
       "image/gif" = image;
+
+      "message/rfc822" = thunderbird;
+      "x-scheme-handler/mid" = thunderbird;
+      "x-scheme-handler/feed" = thunderbird;
+      "application/rss+xml" = thunderbird;
+      "application/x-extension-rss" = thunderbird;
+    };
+  };
+
+  # Blackbox in nemo
+  dconf = {
+    settings = 
+      let
+        terminal = "exec blackbox";
+      in
+      {
+      "org/cinnamon/desktop/default-applications" = {
+        inherit terminal;
+      };
+      "org/gnome/desktop/default-applications" = {
+        inherit terminal;
+      };
     };
   };
 
