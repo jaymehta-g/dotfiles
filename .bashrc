@@ -106,3 +106,5 @@ export DOTS="$HOME/.dotfiles"
 # source
 source $DOTS/terminal/alias
 eval "$(starship init bash)"
+# home manager source
+source ~/.nix-profile/etc/profile.d/hm-session-vars.sh

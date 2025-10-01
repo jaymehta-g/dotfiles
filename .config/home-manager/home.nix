@@ -26,6 +26,15 @@
     pkgs.file-roller
   ];
 
+  xdg.desktopEntries = {
+    adofai = {
+      name = "ADOFAI";
+      categories = ["Application"];
+      exec = "steam-run /home/jay/Games/a-dance-of-fire-and-ice-linux/ADanceOfFireAndIce";
+      icon = "/home/jay/Games/a-dance-of-fire-and-ice-linux/icon.png";
+    };
+  };
+
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
@@ -99,7 +108,6 @@
   {
     # EDITOR = "emacs";
     TERMINAL = term;
-    TERM = term;
   };
 
   # Let Home Manager install and manage itself.
