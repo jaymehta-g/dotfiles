@@ -1,6 +1,7 @@
 { config, pkgs, ... }:
 let
-  terminal="kitty";
+  terminal="alacritty";
+  term-run-cmd=terminal + " -e ";
 in
 {
   # Home Manager needs a bit of information about you and the paths it should
@@ -124,7 +125,7 @@ in
 
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
           binding = "<Super>c";
-          command = terminal + " /home/jay/.dotfiles/terminal/utility/nixwf";
+          command = term-run-cmd + " /home/jay/.dotfiles/terminal/utility/nixwf";
           name = "Nix Workflow";
         };
       };
