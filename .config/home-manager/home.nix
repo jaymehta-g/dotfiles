@@ -19,6 +19,10 @@
     name = "reversal-icons-orange-dark";
     package = (import ./theming/reversal-icons.nix) {inherit pkgs;};
   };
+  # gtk.iconTheme = {
+  #   name = "papirus";
+  #   package = (pkgs.papirus-icon-theme {color = "orange";});
+  # };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -26,6 +30,7 @@
     pkgs.file-roller
   ];
 
+# these go to ~/.local/state/nix/profiles/home-manager/home-path/share/applications
   xdg.desktopEntries = {
     adofai = {
       name = "ADOFAI";
@@ -33,6 +38,15 @@
       exec = "steam-run /home/jay/Games/a-dance-of-fire-and-ice-linux/ADanceOfFireAndIce";
       icon = "/home/jay/Games/a-dance-of-fire-and-ice-linux/icon.png";
     };
+    "thunar" = {
+      name = "Thunar";
+      categories = ["FileManager"];
+      exec = "thunar";
+      icon = "/home/jay/.local/share/icons/reversal-icons/apps/scalable/file-manager.svg";
+    };
+
+    # "thunar-bulk-rename".nodisplay = true;
+    # "thunar-settings".nodisplay = true;
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -49,11 +63,26 @@
       firefox = "firefox.desktop";
       image = "org.gnome.Loupe.desktop";
       thunderbird = "thunderbird.desktop";
+      webMimes = [
+        "application/x-pdf" 
+        "application/pdf" 
+        "x-scheme-handler/http"
+        "x-scheme-handler/https"
+        "x-scheme-handler/chrome"
+        "text/html"
+        "application/x-extension-htm"
+        "application/x-extension-html"
+        "application/x-extension-shtml"
+        "application/xhtml+xml"
+        "application/x-extension-xhtml"
+        "application/x-extension-xht"
+      ];
     in 
+    builtins.listToAttrs (
+      map(x: {name=x; value=firefox;}) webMimes
+    ) // 
     {
-      "application/pdf" = firefox;
-      "application/x-pdf" = firefox;
-      "inode/directory" = "nemo.desktop";
+      "inode/directory" = "thunar.desktop";
       "text/plain" = "xed.desktop";
 
       "image/webp" = image;
@@ -73,16 +102,40 @@
   dconf = {
     settings = 
       let
-        terminal = "exec blackbox";
+        terminal = "exec kitty";
       in
       {
-      "org/cinnamon/desktop/default-applications" = {
-        inherit terminal;
+        "org/cinnamon/desktop/default-applications" = {
+          inherit terminal;
+        };
+        "org/gnome/desktop/default-applications" = {
+          inherit terminal;
+        };
+        "org/gnome/settings-daemon/plugins/media-keys" = {
+          custom-keybindings = [
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+          ];
+        };
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+          binding = "<Control><Alt>t";
+          command = "kitty";
+          name = "Console";
+        };
+
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+          binding = "<Shift><Super>a";
+          command = "normcap";
+          name = "OCR";
+        };
+
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+          binding = "<Super>c";
+          command = "kitty /home/jay/.dotfiles/terminal/utility/nixwf";
+          name = "Nix Workflow";
+        };
       };
-      "org/gnome/desktop/default-applications" = {
-        inherit terminal;
-      };
-    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -103,11 +156,12 @@
   #
   home.sessionVariables = 
   let
-    term="blackbox";
+    term="kitty";
   in
   {
-    # EDITOR = "emacs";
     TERMINAL = term;
+    HM = "~/.config/home-manager";
+    EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.
