@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
-
+let
+  terminal="kitty";
+in
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -98,19 +100,9 @@
     };
   };
 
-  # Blackbox in nemo
   dconf = {
     settings = 
-      let
-        terminal = "exec kitty";
-      in
       {
-        "org/cinnamon/desktop/default-applications" = {
-          inherit terminal;
-        };
-        "org/gnome/desktop/default-applications" = {
-          inherit terminal;
-        };
         "org/gnome/settings-daemon/plugins/media-keys" = {
           custom-keybindings = [
             "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
@@ -120,7 +112,7 @@
         };
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
           binding = "<Control><Alt>t";
-          command = "kitty";
+          command = terminal;
           name = "Console";
         };
 
@@ -132,7 +124,7 @@
 
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
           binding = "<Super>c";
-          command = "kitty /home/jay/.dotfiles/terminal/utility/nixwf";
+          command = terminal + " /home/jay/.dotfiles/terminal/utility/nixwf";
           name = "Nix Workflow";
         };
       };
@@ -155,11 +147,8 @@
   #  /etc/profiles/per-user/jay/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = 
-  let
-    term="kitty";
-  in
   {
-    TERMINAL = term;
+    TERMINAL = terminal;
     HM = "~/.config/home-manager";
     EDITOR = "nvim";
   };
