@@ -30,7 +30,7 @@ def prompt():
     ]
 
     # username
-    uname = $(whoami)[0:-1]
+    uname = $(whoami)
     if uname == "root":
         colors[0] = "WHITE"
     sections.append(" {} ".format(uname)) 
