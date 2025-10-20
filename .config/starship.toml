@@ -166,6 +166,7 @@ disabled = false
 time_format = "%R"
 style = "bg:color_bg1"
 format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
+use_12hr = true
 
 [line_break]
 disabled = false
