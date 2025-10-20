@@ -6,3 +6,8 @@ alias clip='xsel --clipboard'
 
 # nix build
 alias buildpkg="cd \`mktemp -d\`; nix-build '<nixpkgs>' --attr "
+
+alias rm="rm -i"
+alias dl="trash put"
+
+alias cdtmp="cd $(mktemp -d)"
