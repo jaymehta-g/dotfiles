@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+zenity --question --text="Restart into windows?"
+if [ $? = 0 ]; then
+	systemctl reboot --boot-loader-entry=auto-windows
+fi

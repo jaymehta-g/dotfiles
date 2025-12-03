@@ -106,27 +106,41 @@ in
       {
         "org/gnome/settings-daemon/plugins/media-keys" = {
           custom-keybindings = [
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom990/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom991/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom992/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom993/"
+            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom994/"
           ];
         };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom990" = {
           binding = "<Control><Alt>t";
           command = terminal;
           name = "Console";
         };
 
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom991" = {
           binding = "<Shift><Super>a";
           command = "normcap";
           name = "OCR";
         };
 
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2" = {
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom992" = {
           binding = "<Super>c";
           command = term-run-cmd + " /home/jay/.dotfiles/terminal/utility/nixwf";
           name = "Nix Workflow";
+        };
+
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom993" = {
+          binding = "<Super>w";
+          command = "/home/jay/.dotfiles/terminal/utility/winrestart";
+          name = "Windows Reboot";
+        };
+
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom994" = {
+          binding = "<Shift><Control>Escape";
+          command = "gnome-system-monitor";
+          name = "Task Manager";
         };
       };
   };
