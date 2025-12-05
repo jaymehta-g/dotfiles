@@ -35,12 +35,6 @@ in
 
 # these go to ~/.local/state/nix/profiles/home-manager/home-path/share/applications
   xdg.desktopEntries = {
-    # adofai = {
-    #   name = "ADOFAI";
-    #   categories = ["Application"];
-    #   exec = "steam-run /home/jay/Games/a-dance-of-fire-and-ice-linux/ADanceOfFireAndIce";
-    #   icon = "/home/jay/Games/a-dance-of-fire-and-ice-linux/icon.png";
-    # };
     "thunar" = {
       name = "Thunar";
       categories = ["FileManager"];
