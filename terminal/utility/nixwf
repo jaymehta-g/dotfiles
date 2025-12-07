@@ -27,7 +27,7 @@ if [ "$do_pull" = "1" ]; then
 fi
 
 if [ "$edit_cfg" = "1" ]; then
-  code .
+  code -w .
 fi
 
 if [ "$do_update" = "1" ]; then
