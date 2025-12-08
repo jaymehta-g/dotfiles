@@ -47,7 +47,7 @@ fi
 echo "Rebuild success!"
 
 if [ "$do_push" = "1" ]; then
-  current="$(uname -n) $(nixos-rebuild list-generations | sed '2q;d' | awk -F" " '{print "Generation " $1 " on " $2 FS $3 " on NixOS version " $4}')"
+  current="❄️ $(uname -n) $(nixos-rebuild list-generations | sed '2q;d' | awk -F" " '{print "Gen " $1 " on NixOS version " $4}')"
   git add .
   git commit -a -m "$current"
   git push
