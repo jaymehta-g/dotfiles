@@ -74,7 +74,6 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
   test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-  alias ls='ls --color=auto'
   #alias dir='dir --color=auto'
   #alias vdir='vdir --color=auto'
 
@@ -87,7 +86,7 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-
+alias ls='ls -lAhptr --color=auto'
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -105,7 +104,7 @@ export DOTS="$HOME/.dotfiles"
 # source
 source $DOTS/terminal/alias
 source $DOTS/terminal/path
-eval "$(starship init bash)"
+which starship > /dev/null && eval "$(starship init bash)"
 # home manager source
 source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
 
