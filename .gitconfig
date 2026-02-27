@@ -11,7 +11,11 @@
 	email = 91770194+jaymehta-g@users.noreply.github.com
 	name = Jay
 [alias]
-	ci = commit
-	st = status
+	c = commit
+	s = status
+	a = add
+	l = log
+	p = push
+	u = pull
 [init]
 	defaultBranch = main
