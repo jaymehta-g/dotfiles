@@ -4,6 +4,7 @@
 keycode = 4194326
 
 [resource]
+interface/editor/display_scale = 3
 interface/editor/editor_screen = -2
 interface/editor/show_update_spinner = false
 interface/theme/preset = "Custom"
@@ -48,11 +49,12 @@ text_editor/completion/idle_parse_delay = 0.1
 text_editor/completion/code_complete_delay = 0.01
 editors/3d_gizmos/gizmo_settings/bone_axis_length = 0.1
 editors/3d/navigation/emulate_numpad = false
+network/connection/network_mode = 1
 project_manager/default_renderer = "gl_compatibility"
 editors/3d/navigation/orbit_modifier = 0
 editors/3d/navigation/pan_modifier = 1
 editors/3d/navigation/zoom_modifier = 4
-export/android/android_sdk_path = ""
+export/android/android_sdk_path = "/home/jay/Android/Sdk"
 export/android/debug_keystore = ""
 export/android/debug_keystore_pass = "android"
 export/macos/rcodesign = ""
@@ -72,7 +74,7 @@ text_editor/theme/highlighting/gdscript/node_path_color = Color(0.721569, 0.7333
 export/android/java_sdk_path = ""
 _editor_settings_advanced_mode = false
 _project_settings_advanced_mode = false
-_export_template_download_directory = ""
+_export_template_download_directory = "/home/jay/.cache/godot"
 _script_setup_templates_dictionary = {}
 _script_setup_use_script_templates = false
 shortcuts = [{

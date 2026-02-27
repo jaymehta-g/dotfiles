@@ -15,7 +15,5 @@
 	s = status
 	a = add
 	l = log
-	p = push
-	u = pull
 [init]
 	defaultBranch = main
