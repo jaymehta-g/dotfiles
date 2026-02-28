@@ -4,13 +4,15 @@ let
   term-run-cmd=terminal + " -e ";
 in
 {
+  imports = [
+    ./rclone.nix
+  ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "jay";
   home.homeDirectory = "/home/jay";
 
   # RICE!
-  # home.file.".icons/default".source = "${pkgs.bibata-cursors}share/icons/Bibata-Original-Classic";
   gtk.enable = true;
   gtk.cursorTheme = {
     name = "Bibata-Modern-Classic";
@@ -18,14 +20,11 @@ in
     size = 32;
   };
   gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
+  
   gtk.iconTheme = {
-    name = "reversal-icons-orange-dark";
-    package = (import ./theming/reversal-icons.nix) {inherit pkgs;};
+    name = "Papirus-Dark";
+    package = pkgs.papirus-icon-theme.override {color="orange";};
   };
-  # gtk.iconTheme = {
-  #   name = "papirus";
-  #   package = (pkgs.papirus-icon-theme {color = "orange";});
-  # };
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
@@ -39,11 +38,8 @@ in
       name = "Thunar";
       categories = ["FileManager"];
       exec = "thunar";
-      icon = "/home/jay/.config/home-manager/file-manager.svg";
+      icon="/home/jay/.nix-profile/share/icons/Papirus/64x64/places/folder-orange.svg";
     };
-
-    # "thunar-bulk-rename".nodisplay = true;
-    # "thunar-settings".nodisplay = true;
   };
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
@@ -80,7 +76,6 @@ in
     ) // 
     {
       "inode/directory" = "thunar.desktop";
-      "text/plain" = "xed.desktop";
 
       "image/webp" = image;
       "image/png" = image;
@@ -92,6 +87,8 @@ in
       "x-scheme-handler/feed" = thunderbird;
       "application/rss+xml" = thunderbird;
       "application/x-extension-rss" = thunderbird;
+
+      "text/plain" = "org.x.editor.desktop";
     };
   };
 
