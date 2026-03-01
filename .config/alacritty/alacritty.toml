@@ -8,6 +8,7 @@ y = 20
 
 [font]
 size = 18.0
+normal = { family = "JetBrainsMono NF", style = "Regular" }
 
 [general]
 live_config_reload = true
