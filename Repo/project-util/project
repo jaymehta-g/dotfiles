@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+src=~/Repo/project-util
+set -e
+echo $1
+dir=~/Repo/$1
+mkdir $dir
+pushd $dir
+echo "options:"
+make info -f $src/Makefile
+echo "pick option:"
+read option
+make $option -f $src/Makefile
+popd
