@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+for i in "$@"; do ffmpeg -i "$i" -codec copy "${i%.*}.mp4"; done
