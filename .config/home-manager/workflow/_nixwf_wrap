@@ -18,7 +18,9 @@ def push():
 	git push
 
 def rebuild():
-	if ![sudo nixos-rebuild switch 2>&1].returncode != 0:
+	echo "Formatting..."
+	treefmt
+	if ![sudo nixos-rebuild switch 2>&1 | nom].returncode != 0:
 		echo "Error rebuilding"
 		return
 	if pushafter:
@@ -27,8 +29,8 @@ def rebuild():
 
 while True:
 	echo "e: Open Editor"
-	echo "b: Rebuild"
-	echo "u: Update and Rebuild"
+	echo "a: Apply"
+	echo "u: Update and Apply"
 	echo @(f"p: Toggle Push (currently {pushafter})")
 	resp = input(">>> ").strip()
 	if resp == 'e':
@@ -36,8 +38,10 @@ while True:
 		code -n . ./hosts/@(name)/configuration.nix
 	if resp == 'u':
 		nix flake update
-	if resp == 'b' or resp == 'u':
+	if resp == 'a' or resp == 'u':
 		rebuild()
+	if resp == 'p':
+		pushafter = !pushafter
 
 popd
 

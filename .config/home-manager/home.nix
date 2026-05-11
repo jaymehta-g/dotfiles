@@ -119,7 +119,7 @@ in
 
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom992" = {
           binding = "<Super>c";
-          command = term-run-cmd + " /home/jay/.dotfiles/terminal/utility/nixwf";
+          command = term-run-cmd + " nixwf";
           name = "Nix Workflow";
         };
 
