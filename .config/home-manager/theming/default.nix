@@ -1,4 +1,6 @@
-{pkgs ? import <nixpkgs> {}}:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 pkgs.stdenv.mkDerivation {
   name = "reversal-icons";
 
@@ -13,7 +15,7 @@ pkgs.stdenv.mkDerivation {
     pkgs.gtk3
     pkgs.bash
   ];
-  
+
   postPatch = ''
     sed -e '1s:/usr/bin/env bash:${pkgs.bash}/bin/bash:' -i install.sh
   '';

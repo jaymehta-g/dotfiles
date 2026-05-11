@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 let
-  terminal="alacritty";
-  term-run-cmd=terminal + " -e ";
+  terminal = "alacritty";
+  term-run-cmd = terminal + " -e ";
 in
 {
   imports = [
@@ -21,10 +21,10 @@ in
     size = 32;
   };
   gtk.gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-  
+
   gtk.iconTheme = {
     name = "Papirus-Dark";
-    package = pkgs.papirus-icon-theme.override {color="orange";};
+    package = pkgs.papirus-icon-theme.override { color = "orange"; };
   };
 
   # The home.packages option allows you to install Nix packages into your
@@ -33,13 +33,13 @@ in
     pkgs.file-roller
   ];
 
-# these go to ~/.local/state/nix/profiles/home-manager/home-path/share/applications
+  # these go to ~/.local/state/nix/profiles/home-manager/home-path/share/applications
   xdg.desktopEntries = {
     "thunar" = {
       name = "Thunar";
-      categories = ["FileManager"];
+      categories = [ "FileManager" ];
       exec = "thunar";
-      icon="/home/jay/.nix-profile/share/icons/Papirus/64x64/places/folder-orange.svg";
+      icon = "/home/jay/.nix-profile/share/icons/Papirus/64x64/places/folder-orange.svg";
     };
   };
 
@@ -52,89 +52,91 @@ in
   # /run/current-system/sw/share/applications
   xdg.mimeApps = {
     enable = true;
-    defaultApplications = 
-    let 
-      firefox = "firefox.desktop";
-      image = "org.gnome.Loupe.desktop";
-      thunderbird = "thunderbird.desktop";
-      webMimes = [
-        "application/x-pdf" 
-        "application/pdf" 
-        "x-scheme-handler/http"
-        "x-scheme-handler/https"
-        "x-scheme-handler/chrome"
-        "text/html"
-        "application/x-extension-htm"
-        "application/x-extension-html"
-        "application/x-extension-shtml"
-        "application/xhtml+xml"
-        "application/x-extension-xhtml"
-        "application/x-extension-xht"
-      ];
-    in 
-    builtins.listToAttrs (
-      map(x: {name=x; value=firefox;}) webMimes
-    ) // 
-    {
-      "inode/directory" = "thunar.desktop";
+    defaultApplications =
+      let
+        firefox = "firefox.desktop";
+        image = "org.gnome.Loupe.desktop";
+        thunderbird = "thunderbird.desktop";
+        webMimes = [
+          "application/x-pdf"
+          "application/pdf"
+          "x-scheme-handler/http"
+          "x-scheme-handler/https"
+          "x-scheme-handler/chrome"
+          "text/html"
+          "application/x-extension-htm"
+          "application/x-extension-html"
+          "application/x-extension-shtml"
+          "application/xhtml+xml"
+          "application/x-extension-xhtml"
+          "application/x-extension-xht"
+        ];
+      in
+      builtins.listToAttrs (
+        map (x: {
+          name = x;
+          value = firefox;
+        }) webMimes
+      )
+      // {
+        "inode/directory" = "thunar.desktop";
 
-      "image/webp" = image;
-      "image/png" = image;
-      "image/jpeg" = image;
-      "image/gif" = image;
+        "image/webp" = image;
+        "image/png" = image;
+        "image/jpeg" = image;
+        "image/gif" = image;
 
-      "message/rfc822" = thunderbird;
-      "x-scheme-handler/mid" = thunderbird;
-      "x-scheme-handler/feed" = thunderbird;
-      "application/rss+xml" = thunderbird;
-      "application/x-extension-rss" = thunderbird;
+        "message/rfc822" = thunderbird;
+        "x-scheme-handler/mid" = thunderbird;
+        "x-scheme-handler/feed" = thunderbird;
+        "application/rss+xml" = thunderbird;
+        "application/x-extension-rss" = thunderbird;
 
-      "text/plain" = "org.x.editor.desktop";
-    };
+        "text/plain" = "org.x.editor.desktop";
+      };
   };
 
   dconf = {
-    settings = 
-      {
-        "org/gnome/settings-daemon/plugins/media-keys" = {
-          custom-keybindings = [
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom990/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom991/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom992/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom993/"
-            "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom994/"
-          ];
-        };
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom990" = {
-          binding = "<Control><Alt>t";
-          command = terminal;
-          name = "Console";
-        };
-
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom991" = {
-          binding = "<Shift><Super>a";
-          command = "normcap";
-          name = "OCR";
-        };
-
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom992" = {
-          binding = "<Super>c";
-          command = term-run-cmd + " nixwf";
-          name = "Nix Workflow";
-        };
-
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom993" = {
-          binding = "<Super>w";
-          command = "/home/jay/.dotfiles/terminal/utility/winrestart";
-          name = "Windows Reboot";
-        };
-
-        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom994" = {
-          binding = "<Shift><Control>Escape";
-          command = "gnome-system-monitor";
-          name = "Task Manager";
-        };
+    settings = {
+      "org/gnome/settings-daemon/plugins/media-keys" = {
+        custom-keybindings = [
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom990/"
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom991/"
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom992/"
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom993/"
+          "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom994/"
+        ];
       };
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom990" = {
+        binding = "<Control><Alt>t";
+        command = terminal;
+        name = "Console";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom991" = {
+        binding = "<Shift><Super>a";
+        command = "normcap";
+        name = "OCR";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom992" = {
+        binding = "<Super>c";
+        command = term-run-cmd + " nixwf";
+        name = "Nix Workflow";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom993" = {
+        binding = "<Super>w";
+        command = "/home/jay/.dotfiles/terminal/utility/winrestart";
+        name = "Windows Reboot";
+      };
+
+      "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom994" = {
+        binding = "<Shift><Control>Escape";
+        command = "gnome-system-monitor";
+        name = "Task Manager";
+      };
+    };
   };
 
   # Home Manager can also manage your environment variables through
@@ -153,8 +155,7 @@ in
   #
   #  /etc/profiles/per-user/jay/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = 
-  {
+  home.sessionVariables = {
     TERMINAL = terminal;
     HM = "~/.config/home-manager";
     EDITOR = "nvim";

@@ -1,7 +1,9 @@
-{pkgs ? import <nixpkgs> {}}:
-let 
+{
+  pkgs ? import <nixpkgs> { },
+}:
+let
   args = "-orange";
-in 
+in
 pkgs.stdenv.mkDerivation {
   name = "reversal-icons";
 
