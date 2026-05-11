@@ -16,16 +16,20 @@ def push():
 	git add .
 	git commit -a -m @(msg)
 	git push
+	return msg
 
 def rebuild():
 	echo "Formatting..."
 	treefmt
 	if ![sudo nixos-rebuild switch --log-format internal-json -v 2>&1 | sudo nom --json].returncode != 0:
 		echo "Error rebuilding"
+		notify-send -e "Rebuild Failed 💔💔💔"
 		return
+	msg = ""
 	if pushafter:
-		push()
-	quit()
+		msg = push()
+	notify-send -e "Nix Rebuild Ok 🤠" f"{msg}"
+	exit
 
 while True:
 	echo "e: Open Editor"

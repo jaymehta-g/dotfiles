@@ -11,6 +11,7 @@ in
           pkgs.xonsh
           pkgs.nixfmt-tree
           pkgs.tmux
+          pkgs.libnotify
         ]
       }:$PATH
       tmux new -As nixos_rebuild_workflow "${pkgs.xonsh}/bin/xonsh ${nixwfScript}"
