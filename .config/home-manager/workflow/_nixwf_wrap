@@ -10,6 +10,13 @@ if $(git status --porcelain).__len__() > 0:
 echo "trying to pull..."
 git pull --ff-only
 
+def autoformat():
+	echo "Formatting..."
+	if ![treefmt].returncode != 0:
+		echo "Formatting failed"
+		return False
+	return True
+
 def push():
 	gens = $(@lines nixos-rebuild list-generations)[1].split()
 	msg = f"❄️  {$(uname -n)} gen {gens[0]}, channel {gens[3]}"
@@ -19,8 +26,7 @@ def push():
 	return msg
 
 def rebuild():
-	echo "Formatting..."
-	treefmt
+	if not autoformat(): return
 	if ![sudo nixos-rebuild switch --log-format internal-json -v 2>&1 | sudo nom --json].returncode != 0:
 		echo "Error rebuilding"
 		notify-send -e "Rebuild Failed 💔💔💔"
@@ -33,6 +39,7 @@ def rebuild():
 
 while True:
 	echo "e: Open Editor"
+	echo "f: Autoformat"
 	echo "d: Print Diff"
 	echo "a: Apply"
 	echo "u: Update and Apply"
@@ -46,8 +53,10 @@ while True:
 	if resp == 'a' or resp == 'u':
 		rebuild()
 	if resp == 'p':
-		pushafter = !pushafter
+		pushafter = (not pushafter)
 	if resp == 'd':
 		git diff
+	if resp == 'f':
+		autoformat()
 
 popd
