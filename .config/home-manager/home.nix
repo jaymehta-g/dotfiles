@@ -24,7 +24,7 @@ in
 
   gtk.iconTheme = {
     name = "Papirus-Dark";
-    package = pkgs.papirus-icon-theme.override { color = "orange"; };
+    package = pkgs.papirus-icon-theme.override { color = "green"; };
   };
 
   # The home.packages option allows you to install Nix packages into your
