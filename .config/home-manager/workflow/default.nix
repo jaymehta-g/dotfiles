@@ -18,4 +18,20 @@ in
     '')
   ];
 
+  home.file.".scripts/webp2png" = {
+    text = ''
+      #!/usr/bin/env bash
+      for i in "$@"; do ${pkgs.libwebp}/bin/dwebp "$i" -o "''${i%.*}.png"; done
+    '';
+    executable = true;
+  };
+
+  home.file.".scripts/mkv2mp3" = {
+    text = ''
+      #!/usr/bin/env bash
+      for i in "$@"; do ${pkgs.ffmpeg}/bin/ffmpeg -i "$i" -codec copy "''${i%.*}.mp4"; done
+    '';
+    executable = true;
+  };
+
 }

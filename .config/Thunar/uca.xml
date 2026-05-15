@@ -16,10 +16,21 @@
 	<name>Convert to mp3</name>
 	<submenu></submenu>
 	<unique-id>1775617449919991-1</unique-id>
-	<command>/home/jay/.dotfiles/terminal/utility/mvk2mp3 %F</command>
+	<command>/home/jay/.scripts/mvk2mp3 %F</command>
 	<description></description>
 	<range>*</range>
 	<patterns>*.mkv</patterns>
 	<video-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>Convert to png</name>
+	<submenu></submenu>
+	<unique-id>1775617449919992-1</unique-id>
+	<command>/home/jay/.scripts/webp2png %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*.webp</patterns>
+	<image-files/>
 </action>
 </actions>
