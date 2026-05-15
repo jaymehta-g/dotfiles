@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon></icon>
+	<name>Open Terminal</name>
+	<submenu></submenu>
+	<unique-id>1757641010482570-1</unique-id>
+	<command>alacritty --working-directory %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>Convert to mp3</name>
+	<submenu></submenu>
+	<unique-id>1775617449919991-1</unique-id>
+	<command>/home/jay/.dotfiles/terminal/utility/mvk2mp3 %F</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*.mkv</patterns>
+	<video-files/>
+</action>
+</actions>
