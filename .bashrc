@@ -100,7 +100,7 @@ fi
 
 ## user config
 # make dotfiles env var
-export DOTS="/etc/nixos/dotfiles"
+export DOTS="~/dots"
 # source
 source $DOTS/terminal/alias
 source $DOTS/terminal/path
@@ -108,8 +108,5 @@ which starship > /dev/null && eval "$(starship init bash)"
 
 # home manager source
 [ -f ~/.nix-profile/etc/profile.d/hm-session-vars.sh ] && source ~/.nix-profile/etc/profile.d/hm-session-vars.sh
-
-# sandbox pi
-alias pi="~/.scripts/pi-sandbox"
 
 true

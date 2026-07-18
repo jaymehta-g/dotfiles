@@ -34,24 +34,4 @@ in
     executable = true;
   };
 
-  home.file.".scripts/pi-sandbox" = {
-    text = ''
-            #!/usr/bin/env bash
-            ${pkgs.bubblewrap}/bin/bwrap \
-              --ro-bind / / \
-              --bind "$PWD" "$PWD" \
-              --dev /dev \
-              --proc /proc \
-              --bind /tmp /tmp \
-              --bind /nix /nix \
-              --bind ~/.cache ~/.cache \
-              --bind ~/.local ~/.local \
-      	      --bind ~/.pi/agent ~/.pi/agent \
-      	      --tmpfs /run \
-              --ro-bind /run/current-system /run/current-system \
-              -- pi $@
-    '';
-    executable = true;
-  };
-
 }
