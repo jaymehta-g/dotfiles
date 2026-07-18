@@ -4,6 +4,8 @@ alias clip='xsel --clipboard'
 # nix build
 alias buildpkg="cd \`mktemp -d\`; nix-build '<nixpkgs>' --attr "
 
+alias nixrb="sudo nixos-rebuild switch"
+
 alias dl="trash -v"
 
 alias cdtmp="cd $(mktemp -d)"

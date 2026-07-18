@@ -1,4 +1,10 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  system,
+  ...
+}:
 let
   terminal = "alacritty";
   term-run-cmd = terminal + " -e ";
@@ -31,6 +37,7 @@ in
   # environment.
   home.packages = [
     pkgs.file-roller
+    pkgs.loupe
   ];
 
   # these go to ~/.local/state/nix/profiles/home-manager/home-path/share/applications

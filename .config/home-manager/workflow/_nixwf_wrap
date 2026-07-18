@@ -5,7 +5,7 @@ pushafter = True
 
 if $(git status --porcelain).__len__() > 0:
 	echo "Tree dirty!"
-	git diff
+	git diff HEAD
 
 echo "trying to pull..."
 git pull --ff-only
@@ -27,10 +27,18 @@ def push():
 
 def rebuild():
 	if not autoformat(): return
+	echo "Applying system config..."
 	if ![sudo nixos-rebuild switch --log-format internal-json -v 2>&1 | sudo nom --json].returncode != 0:
 		echo "Error rebuilding"
-		notify-send -e "Rebuild Failed 💔💔💔"
+		notify-send -e "Rebuild Failed (system) 💔💔💔"
 		return
+	# Check if home-manager files have changed
+	hm_changed = $(git diff --name-only HEAD -- ./dotfiles/.config/home-manager/).strip() != ""
+	if hm_changed:
+		if ![home-manager switch].returncode != 0:
+			echo "Error with home-manager"
+			notify-send -e "Rebuild Failed (home-manager) 💔💔💔"
+			return
 	msg = ""
 	if pushafter:
 		msg = push()
@@ -47,15 +55,18 @@ while True:
 	resp = input(">>> ").strip()
 	if resp == 'e':
 		name = $(hostname)
-		code -n . ./hosts/@(name)/configuration.nix
+		code -n . ./hosts/@(name)/configuration.nix ./dotfiles/.config/home-manager/home.nix
 	if resp == 'u':
 		nix flake update
+		pushd ./dotfiles/.config/home-manager
+		nix flake update
+		popd
 	if resp == 'a' or resp == 'u':
 		rebuild()
 	if resp == 'p':
 		pushafter = (not pushafter)
 	if resp == 'd':
-		git diff
+		git diff HEAD
 	if resp == 'f':
 		autoformat()
 

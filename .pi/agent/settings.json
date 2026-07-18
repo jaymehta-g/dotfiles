@@ -1,0 +1,9 @@
+{
+  "lastChangelogVersion": "0.80.6",
+  "theme": "dark",
+  "packages": [
+    "npm:pi-ask-user"
+  ],
+  "defaultProvider": "openrouter",
+  "defaultModel": "poolside/laguna-m.1:free"
+}
