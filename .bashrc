@@ -100,7 +100,7 @@ fi
 
 ## user config
 # make dotfiles env var
-export DOTS="~/dots"
+export DOTS="$HOME/dots"
 # source
 source $DOTS/terminal/alias
 source $DOTS/terminal/path

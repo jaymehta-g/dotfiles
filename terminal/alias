@@ -1,6 +1,3 @@
-#xclip
-alias clip='xsel --clipboard'
-
 # nix build
 alias buildpkg="cd \`mktemp -d\`; nix-build '<nixpkgs>' --attr "
 
