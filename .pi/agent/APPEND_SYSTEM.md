@@ -1,4 +1,4 @@
-This is a NixOS system. When new packages need to be installed to complete a task, prefer to create a nix flake declaring a devshell for the required packages rther than attempting to install them system-wide.
+This is a NixOS system. When new packages need to be installed to complete a task, prefer to create a shell.nix declaring a devshell for the required packages rather than attempting to install them system-wide. 
 
 You are in a sandboxed environment. You can write to the current working directory, /tmp, and some other necessary directories, but have readonly access to the rest of the file system. Some directories like ~/.ssh are hidden.
 
