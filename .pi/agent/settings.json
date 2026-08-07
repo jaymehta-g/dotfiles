@@ -2,7 +2,6 @@
   "lastChangelogVersion": "0.80.10",
   "theme": "dark",
   "packages": [
-    "npm:pi-ask-user",
     "npm:pi-background-tasks",
     "npm:@ff-labs/pi-fff"
   ],
