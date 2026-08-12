@@ -652,3 +652,10 @@ debug {
   // Allows notification actions and window activation from Noctalia.
   honor-xdg-activation-with-invalid-serial
 }
+
+// Disable the hot corners.
+gestures {
+    hot-corners {
+        off
+    }
+}
