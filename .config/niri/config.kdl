@@ -631,9 +631,6 @@ spawn-at-startup "env" "QT_QPA_PLATFORMTHEME=gtk3" "noctalia-shell"
 // kdeconnect
 spawn-at-startup "kdeconnect-indicator"
 
-// wallpaper service
-spawn-at-startup "systemctl" "--user" "restart" "timewall"
-
 window-rule {
   // Rounded corners for a modern look.
   geometry-corner-radius 10

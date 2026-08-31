@@ -10,7 +10,7 @@
   ];
 
   services.timewall = {
-    enable = true;
+    enable = false;
     wallpaperPath = "/home/jay/Pictures/Wallpapers/wallpaper.heic";
     config = {
       location = {
