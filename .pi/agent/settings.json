@@ -1,10 +1,10 @@
 {
-  "lastChangelogVersion": "0.80.10",
+  "lastChangelogVersion": "0.83.0",
   "theme": "dark",
   "packages": [
-    "npm:pi-background-tasks",
-    "npm:@ff-labs/pi-fff"
+    "npm:@ff-labs/pi-fff",
+    "npm:pi-bg-run"
   ],
   "defaultProvider": "openrouter",
-  "defaultModel": "xiaomi/mimo-v2.5"
+  "defaultModel": "z-ai/glm-5.3-flash"
 }
