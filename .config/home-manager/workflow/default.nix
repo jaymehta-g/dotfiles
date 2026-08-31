@@ -4,6 +4,8 @@ let
 in
 {
   home.packages = [
+    (pkgs.writeShellScriptBin "check-upstream"
+      (builtins.readFile ./check-upstream.sh))
     (pkgs.writeShellScriptBin "nixwf" ''
       export PATH=${
         pkgs.lib.makeBinPath [
