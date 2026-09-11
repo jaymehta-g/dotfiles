@@ -1,3 +1,9 @@
 # nix build results
 result
 .config/Thunar/accels.scm
+.pi/agent/auth.json
+.pi/agent/models-store.json
+.pi/agent/fff/frecency/data.mdb
+.pi/agent/fff/frecency/lock.mdb
+.pi/agent/fff/history/data.mdb
+.pi/agent/fff/history/lock.mdb
