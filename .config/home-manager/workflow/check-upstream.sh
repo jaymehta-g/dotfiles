@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Check ~/dots and /etc/nixos for unpulled upstream changes and notify.
+sleep 10
 set -u
 
 NOTIFY="${NOTIFY:-notify-send}"
