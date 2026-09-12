@@ -14,6 +14,8 @@ notify() {
     fi
 }
 
+declare -a CHANGED=()
+
 for repo in "${REPOS[@]}"; do
     if [[ ! -d "$repo/.git" ]]; then
         echo "skipping $repo: not a git repo" >&2
@@ -38,11 +40,14 @@ for repo in "${REPOS[@]}"; do
 
     behind="$(git -C "$repo" rev-list --count "HEAD..$upstream" 2>/dev/null)"
     if [[ -n "$behind" && "$behind" -gt 0 ]]; then
-        summary="$(git -C "$repo" log --oneline "HEAD..$upstream" 2>/dev/null | head -n 3)"
-        notify "Update available: $repo" "$behind new commit(s) on $upstream:
-$summary"
         echo "$repo is $behind commit(s) behind $upstream"
+        CHANGED+=("$repo ($behind new commit(s) on $upstream)")
     else
         echo "$repo is up to date with $upstream"
     fi
 done
+
+if [[ ${#CHANGED[@]} -gt 0 ]]; then
+    body="$(printf '%s\n' "${CHANGED[@]}")"
+    notify "Upstream updates available in ${#CHANGED[@]} repo(s)" "$body"
+fi
