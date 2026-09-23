@@ -40,17 +40,17 @@ in
     pkgs.loupe
   ];
 
-  # empty trash older than 7 days, every 24 hours
-  systemd.user.services.trash-empty = {
-    Unit.Description = "Empty trash older than 7 days";
+  # clean up thumbnails and empty trash older than 7 days, every 24 hours
+  systemd.user.services.file-cleanup = {
+    Unit.Description = "Delete thumbnails and empty trash older than 7 days";
     Service = {
       Type = "oneshot";
-      ExecStart = "${pkgs.trash-cli}/bin/trash-empty 7";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'rm -rf ~/.cache/thumbnails && ${pkgs.trash-cli}/bin/trash-empty 7'";
     };
   };
 
-  systemd.user.timers.trash-empty = {
-    Unit.Description = "Run trash-empty every 24 hours";
+  systemd.user.timers.file-cleanup = {
+    Unit.Description = "Run file-cleanup every 24 hours";
     Timer = {
       OnBootSec = "10min";
       OnUnitActiveSec = "24h";
