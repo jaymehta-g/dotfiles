@@ -16,7 +16,7 @@
 	<name>Convert to mp3</name>
 	<submenu></submenu>
 	<unique-id>1775617449919991-1</unique-id>
-	<command>/home/jay/.scripts/mvk2mp3 %F</command>
+	<command>/home/jay/.scripts/mkv2mp3 %F</command>
 	<description></description>
 	<range>*</range>
 	<patterns>*.mkv</patterns>

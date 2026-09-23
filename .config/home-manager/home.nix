@@ -40,6 +40,24 @@ in
     pkgs.loupe
   ];
 
+  # empty trash older than 7 days, every 24 hours
+  systemd.user.services.trash-empty = {
+    Unit.Description = "Empty trash older than 7 days";
+    Service = {
+      Type = "oneshot";
+      ExecStart = "${pkgs.trash-cli}/bin/trash-empty 7";
+    };
+  };
+
+  systemd.user.timers.trash-empty = {
+    Unit.Description = "Run trash-empty every 24 hours";
+    Timer = {
+      OnBootSec = "10min";
+      OnUnitActiveSec = "24h";
+    };
+    Install.WantedBy = [ "timers.target" ];
+  };
+
   # these go to ~/.local/state/nix/profiles/home-manager/home-path/share/applications
   xdg.desktopEntries = {
     "thunar" = {
