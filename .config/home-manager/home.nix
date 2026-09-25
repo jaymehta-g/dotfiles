@@ -40,22 +40,14 @@ in
     pkgs.loupe
   ];
 
-  # clean up thumbnails and empty trash older than 7 days, every 24 hours
+  # clean up thumbnails and empty trash older than 7 days, on every boot
   systemd.user.services.file-cleanup = {
     Unit.Description = "Delete thumbnails and empty trash older than 7 days";
     Service = {
       Type = "oneshot";
       ExecStart = "${pkgs.bash}/bin/bash -c 'rm -rf ~/.cache/thumbnails && ${pkgs.trash-cli}/bin/trash-empty 7'";
     };
-  };
-
-  systemd.user.timers.file-cleanup = {
-    Unit.Description = "Run file-cleanup every 24 hours";
-    Timer = {
-      OnBootSec = "10min";
-      OnUnitActiveSec = "24h";
-    };
-    Install.WantedBy = [ "timers.target" ];
+    Install.WantedBy = [ "graphical.target" ];
   };
 
   # these go to ~/.local/state/nix/profiles/home-manager/home-path/share/applications
