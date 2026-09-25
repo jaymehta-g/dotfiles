@@ -45,6 +45,7 @@ in
     Unit.Description = "Delete thumbnails and empty trash older than 7 days";
     Service = {
       Type = "oneshot";
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 10";
       ExecStart = "${pkgs.bash}/bin/bash -c 'rm -rf ~/.cache/thumbnails && ${pkgs.trash-cli}/bin/trash-empty 7'";
     };
     Install.WantedBy = [ "graphical.target" ];
