@@ -15,6 +15,9 @@ hide_when_no_media = true
 [widget.wallpaper]
 enabled = false
 
+[widget.brightness]
+enabled = false
+
 [widget.clock]
 format = "{:%b %d, %I:%M}"
 
