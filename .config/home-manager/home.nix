@@ -11,8 +11,8 @@ let
 in
 {
   imports = [
-    ./rclone.nix
     ./workflow
+    ./services
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -45,10 +45,9 @@ in
     Unit.Description = "Delete thumbnails and empty trash older than 7 days";
     Service = {
       Type = "oneshot";
-      ExecStartPre = "${pkgs.coreutils}/bin/sleep 10";
-      ExecStart = "${pkgs.bash}/bin/bash -c 'rm -rf ~/.cache/thumbnails && ${pkgs.trash-cli}/bin/trash-empty 7'";
+      ExecStart = "${pkgs.bash}/bin/bash -c 'rm -rf ~/.cache/thumbnails && ${pkgs.trash-cli}/bin/trash-empty -vf 7'";
     };
-    Install.WantedBy = [ "graphical.target" ];
+    Install.WantedBy = [ "default.target" ];
   };
 
   # these go to ~/.local/state/nix/profiles/home-manager/home-path/share/applications
