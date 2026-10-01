@@ -1,29 +1,60 @@
 #!/usr/bin/env xonsh
 
-pushd /etc/nixos
+NIXOS = "/etc/nixos"
+DOTS = "/home/jay/dots"
+HM = DOTS + "/.config/home-manager"
+
 pushafter = True
 
-if $(git status --porcelain).__len__() > 0:
-	echo "Tree dirty!"
-	git diff HEAD
+def repo_dirty(repo):
+	return $(git -C @(repo) status --porcelain).__len__() > 0
+
+for repo in (NIXOS, DOTS):
+	if repo_dirty(repo):
+		echo "Tree dirty: " + repo
+		git -C @(repo) diff HEAD
 
 echo "trying to pull..."
-git pull --ff-only
+for repo in (NIXOS, DOTS):
+	git -C @(repo) pull --ff-only
 
 def autoformat():
 	echo "Formatting..."
-	if ![treefmt].returncode != 0:
-		echo "Formatting failed"
-		return False
+	for d in (NIXOS, HM):
+		pushd @(d)
+		if ![treefmt].returncode != 0:
+			echo "Formatting failed in " + d
+			popd
+			return False
+		popd
 	return True
 
+def hm_gen():
+	line = $(home-manager generations).splitlines()[0]
+	return line.split("id ")[1].split()[0]
+
 def push():
+	msgs = []
+	# nixos repo: commit everything with generation message
+	pushd @(NIXOS)
 	gens = $(@lines nixos-rebuild list-generations)[1].split()
-	msg = f"❄️  {$(uname -n)} gen {gens[0]}, channel {gens[3]}"
+	nmsg = f"❄️  {$(uname -n)} gen {gens[0]}, channel {gens[3]}"
 	git add .
-	git commit -a -m @(msg)
-	git push
-	return msg
+	if ![git diff --cached --quiet].returncode != 0:
+		git commit -m @(nmsg)
+		msgs.append(nmsg)
+	popd
+	# dots repo: commit only the home-manager config
+	pushd @(DOTS)
+	git add .config/home-manager
+	if ![git diff --cached --quiet].returncode != 0:
+		hmsg = f"🏠 {$(uname -n)} hm gen {hm_gen()}"
+		git commit -m @(hmsg)
+		msgs.append(hmsg)
+	popd
+	for repo in (NIXOS, DOTS):
+		git -C @(repo) push
+	return "\n".join(msgs)
 
 def rebuild():
 	if not autoformat(): return
@@ -32,13 +63,11 @@ def rebuild():
 		echo "Error rebuilding"
 		notify-send -e "Rebuild Failed (system) 💔💔💔"
 		return
-	# Check if home-manager files have changed
-	hm_changed = $(git diff --name-only HEAD -- ./dotfiles/.config/home-manager/).strip() != ""
-	if hm_changed:
-		if ![home-manager switch].returncode != 0:
-			echo "Error with home-manager"
-			notify-send -e "Rebuild Failed (home-manager) 💔💔💔"
-			return
+	echo "Applying home config..."
+	if ![home-manager switch --flake ~/.config/home-manager].returncode != 0:
+		echo "Error with home-manager"
+		notify-send -e "Rebuild Failed (home-manager) 💔💔💔"
+		return
 	msg = ""
 	if pushafter:
 		msg = push()
@@ -54,11 +83,12 @@ while True:
 	echo @(f"p: Toggle Push (currently {pushafter})")
 	resp = input(">>> ").strip()
 	if resp == 'e':
-		name = $(hostname)
-		code -n . ./hosts/@(name)/configuration.nix ./dotfiles/.config/home-manager/home.nix
+		code -n @(NIXOS) @(DOTS)
 	if resp == 'u':
+		pushd @(NIXOS)
 		nix flake update
-		pushd ./dotfiles/.config/home-manager
+		popd
+		pushd @(HM)
 		nix flake update
 		popd
 	if resp == 'a' or resp == 'u':
@@ -66,8 +96,7 @@ while True:
 	if resp == 'p':
 		pushafter = (not pushafter)
 	if resp == 'd':
-		git diff HEAD
+		git -C @(NIXOS) diff HEAD
+		git -C @(DOTS) diff HEAD
 	if resp == 'f':
 		autoformat()
-
-popd
