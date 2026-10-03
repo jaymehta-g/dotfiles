@@ -1,6 +1,5 @@
 { config, pkgs, ... }:
 {
-
   # clean up thumbnails and empty trash older than 7 days, on every boot
   systemd.user.services.file-cleanup = {
     Unit.Description = "Delete thumbnails and empty trash older than 7 days";
@@ -10,5 +9,4 @@
     };
     Install.WantedBy = [ "default.target" ];
   };
-
 }
