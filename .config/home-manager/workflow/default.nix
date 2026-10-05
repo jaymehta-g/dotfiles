@@ -54,4 +54,20 @@ in
     executable = true;
   };
 
+  home.file.".scripts/pasteimage" = {
+    text = ''
+      #!/usr/bin/env bash
+      export PATH=${pkgs.lib.makeBinPath [ pkgs.wl-clipboard ]}:$PATH
+      if [[ $# -ne 1 || ! -d "$1" ]]; then
+        exit 1
+      fi
+      if ! wl-paste -l | grep -qxF 'image/png'; then
+        exit 1
+      fi
+      target="$1/clipboard-$(date +%Y%m%d-%H%M%S).png"
+      wl-paste -t image/png > "$target"
+    '';
+    executable = true;
+  };
+
 }

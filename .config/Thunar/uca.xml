@@ -33,4 +33,15 @@
 	<patterns>*.webp</patterns>
 	<image-files/>
 </action>
+<action>
+	<icon></icon>
+	<name>Paste Image</name>
+	<submenu></submenu>
+	<unique-id>1791220025446164-1</unique-id>
+	<command>/home/jay/.scripts/pasteimage %f</command>
+	<description></description>
+	<range>*</range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
 </actions>
