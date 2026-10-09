@@ -54,13 +54,8 @@ in
         exit 1
       fi
       dir="$(dirname "$1")"
-      base="$(basename "''${1%%/}")"
+      base="archive-$(date +%Y%m%d-%H%M%S)"
       out="$dir/$base.zip"
-      if [[ -e "$out" ]]; then
-        i=1
-        while [[ -e "$dir/$base-$i.zip" ]]; do i=$((i+1)); done
-        out="$dir/$base-$i.zip"
-      fi
       names=()
       for f in "$@"; do
         names+=("$(basename "$f")")
