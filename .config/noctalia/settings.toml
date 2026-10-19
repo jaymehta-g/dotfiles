@@ -67,3 +67,23 @@ glyph = "brand-windows-filled"
 label = "Windows"
 shortcut = "6"
 variant = "default"
+
+# screen lock
+[idle]
+behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
+
+    [idle.behavior.lock]
+    action = "lock"
+    enabled = false
+    timeout = 600.0
+
+    [idle.behavior.lock-and-suspend]
+    action = "lock_and_suspend"
+    enabled = true
+    timeout = 240.0
+
+    [idle.behavior.screen-off]
+    action = "screen_off"
+    enabled = true
+    locked_timeout = 120.0
+    timeout = 120.0
