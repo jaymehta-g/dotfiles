@@ -75,7 +75,8 @@ def rebuild():
 	exit
 
 while True:
-	echo "e: Open Editor"
+	echo "e: Edit Nixos"
+	echo "d: Edit dots"
 	echo "f: Autoformat"
 	echo "d: Print Diff"
 	echo "a: Apply"
@@ -83,7 +84,9 @@ while True:
 	echo @(f"p: Toggle Push (currently {pushafter})")
 	resp = input(">>> ").strip()
 	if resp == 'e':
-		code -n @(NIXOS) @(DOTS)
+		code -n @(NIXOS)
+	if resp == 'd':
+		code -n @(DOTS)
 	if resp == 'u':
 		pushd @(NIXOS)
 		nix flake update
