@@ -69,6 +69,7 @@ shortcut = "6"
 variant = "default"
 
 # screen lock
+
 [idle]
 behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
 
@@ -87,3 +88,12 @@ behavior_order = [ "lock", "screen-off", "lock-and-suspend" ]
     enabled = true
     locked_timeout = 120.0
     timeout = 120.0
+
+# header
+[bar.default]
+margin_ends = 0
+radius = 0
+
+# hooks
+[hooks]
+started = "noctalia msg clipboard-clear"
