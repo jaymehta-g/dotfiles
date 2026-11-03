@@ -1,3 +1,5 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR DOTS:/home/jay/dots
 SETUVAR __fish_initialized:4300
+SETUVAR fish_user_paths:/home/jay/\x2ecargo/bin

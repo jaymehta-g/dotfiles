@@ -1,1 +1,2 @@
 export PATH=~/.cargo/bin:$PATH
+export DOTS="$HOME/dots"
